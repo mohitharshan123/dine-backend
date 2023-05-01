@@ -1,4 +1,3 @@
 # frozen_string_literal: true
 
-json.id @restaurant.id
-json.name @restaurant.name
+json.partial! @restaurant, as: :restaurant
