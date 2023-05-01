@@ -6,7 +6,7 @@ Category.delete_all
 Restaurant.delete_all
 
 
-10.times { Restaurant.create!(name: Faker::Name.name, location: Faker::Address.city, contact: Faker::PhoneNumber.phone_number ) }
+10.times { Restaurant.create!(name: Faker::Company.name, location: Faker::Address.city, contact: Faker::PhoneNumber.phone_number ) }
 Category.create!(name: 'Breakfast', restaurant: Restaurant.first)
 Category.create!(name: 'Lunch', restaurant: Restaurant.first)
 Category.create!(name: 'Dinner', restaurant: Restaurant.first)
