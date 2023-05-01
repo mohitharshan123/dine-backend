@@ -1,11 +1,25 @@
 # This file should contain all the record creation needed to seed the database with its default values.
 require 'faker'
 
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
+CategoryItem.delete_all
+Category.delete_all
+Restaurant.delete_all
 
-10.times { Restaurant.create!(name: "Swiggy") }
+
+10.times { Restaurant.create!(name: Faker::Name.name, location: Faker::Address.city, contact: Faker::PhoneNumber.phone_number ) }
+Category.create!(name: 'Breakfast', restaurant: Restaurant.first)
+Category.create!(name: 'Lunch', restaurant: Restaurant.first)
+Category.create!(name: 'Dinner', restaurant: Restaurant.first)
+
+10.times do
+  CategoryItem.create(name: Faker::Food.dish, category: Category.first, price: Faker::Number.number(digits: 3),
+                      description: Faker::Food.description)
+end
+10.times do
+  CategoryItem.create(name: Faker::Food.dish, category: Category.last, price: Faker::Number.number(digits: 3),
+                      description: Faker::Food.description)
+end
+10.times do
+  CategoryItem.create(name: Faker::Food.dish, category: Category.find_by_name('Lunch'),
+                      price: Faker::Number.number(digits: 3), description: Faker::Food.description)
+end
